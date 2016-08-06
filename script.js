@@ -34,8 +34,9 @@ $(document).ready(function(){
                 numberOfMoves++;
             }
             else{
+                new Audio('./TaDa.wav').play();
                 clearInterval(repeat);
-                alert('The bot has cleaned all the dirty cells in '+numberOfMoves+' moves.');
+                setTimeout(function(){alert('The bot has cleaned all the dirty cells in '+numberOfMoves+' moves.');},100);
             }
         },500);
         
@@ -65,38 +66,39 @@ $(document).ready(function(){
                 }
             }
         }
+        var moveSound = new Audio('./moveSound.wav');
+        var clean = new Audio('./clean.wav');
 
         var move = $().nextCell(bot,board);
         console.log('Command for next move: '+move);
         
+        var a = 0;
+        var b = 0;
+        
             if(move.localeCompare('UP') == 0){
-                var id = $().getId(bot.x,bot.y);
-                $(id).removeClass('bot');
-                id = $().getId(bot.x-1,bot.y);
-                $(id).addClass('bot');
+                a--;
             }
             else if(move.localeCompare('DOWN') == 0){
-                var id = $().getId(bot.x,bot.y);
-                $(id).removeClass('bot');
-                id = $().getId(bot.x+1,bot.y);
-                $(id).addClass('bot');
+                a++;
             }
             else if(move.localeCompare('LEFT') == 0){
-                var id = $().getId(bot.x,bot.y);
-                $(id).removeClass('bot');
-                id = $().getId(bot.x,bot.y-1);
-                $(id).addClass('bot');
+                b--;
             }
             else if(move.localeCompare('RIGHT') == 0){
+                b++;
+            }
+            if(a != 0 || b != 0){
                 var id = $().getId(bot.x,bot.y);
                 $(id).removeClass('bot');
-                id = $().getId(bot.x,bot.y+1);
+                id = $().getId(bot.x+a,bot.y+b);
                 $(id).addClass('bot');
+                moveSound.play();
             }
             else{
                 var id = $().getId(bot.x,bot.y);
                 $(id).removeClass('dirty').addClass('clean');
                 numberOfDirtyCells--;
+                clean.play();
             }
     });
     
