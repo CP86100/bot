@@ -1,0 +1,41 @@
+.dirty{
+    background-color: saddlebrown;
+}
+.clean{
+    background-color: bisque;
+}
+.bot{
+    background-image: url("/robot.png");
+    background-size: 45px 45px;
+    background-repeat: no-repeat;
+}
+td{
+    height: 50px;
+    width: 50px;
+    border: 1px solid black;
+}
+table{
+    border-collapse:;
+    border-spacing: 0;
+    border: 1px solid black;
+}
+img{
+    height: 45px;
+    width:  45px;
+}
+#panel{
+    position: absolute;
+    left: 87px;
+}
+button{
+    background-color: white;
+    border: 1px black solid;
+    color: black;
+    border-radius: 100%;
+}
+button:hover{
+    background-color: greenyellow;
+    color: white;
+    border: 1px white solid;
+}
+
