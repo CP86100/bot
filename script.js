@@ -5,35 +5,40 @@ $(document).ready(function(){
     
     var numOfBots = 1; //This is the maximum number of bots allowed on the boeard.
     var numberOfDirtyCells = 0;
+    var clickTd = true;
  
    $('td').click(function(){
        
-       if(numOfBots < 1 && !$(this).hasClass('bot')){
-           $(this).addClass('bot');
-           numOfBots++;
-       }
-       else if($(this).hasClass('bot')){
-           $(this).removeClass('bot');
-           numOfBots--;
-       }
-       else if($(this).hasClass('clean')){
-           $(this).removeClass('clean').addClass('dirty');
-           numberOfDirtyCells++;
-       }
-       else{
-            $(this).removeClass('dirty').addClass('clean');
+       if(clickTd == true){
+           if(numOfBots < 1 && !$(this).hasClass('bot')){
+               $(this).addClass('bot');
+               numOfBots++;
+           }
+           else if($(this).hasClass('bot')){
+               $(this).removeClass('bot');
+               numOfBots--;
+           }
+           else if($(this).hasClass('clean')){
+               $(this).removeClass('clean').addClass('dirty');
+               numberOfDirtyCells++;
+           }
+           else{
+                $(this).removeClass('dirty').addClass('clean');
+           }
        }
        
    });
     
     $('#auto').click(function(){
         var numberOfMoves = 0;
+        clickTd = false;
         var repeat = setInterval(function(){
             if(numberOfDirtyCells > 0){
                 $('#next').click();
                 numberOfMoves++;
             }
             else{
+                clickTd = true;
                 new Audio('./TaDa.wav').play();
                 clearInterval(repeat);
                 setTimeout(function(){alert('The bot has cleaned all the dirty cells in '+numberOfMoves+' moves.');},100);
